@@ -31,7 +31,7 @@ export default function AppHeader() {
             Worker
           </Link>
           <Link href="/admin" className="text-secondary hover:text-primary">
-            Admin
+            Admin!!
           </Link>
         </nav>
       </div>
