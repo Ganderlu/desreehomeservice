@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
   createUserWithEmailAndPassword,
@@ -19,7 +19,7 @@ import { cn } from "../../lib/utils";
 
 type Role = "customer" | "worker";
 
-export default function GetStartedPage() {
+function GetStartedPageContent() {
   const router = useRouter();
   const params = useSearchParams();
   const roleFromQuery = params.get("role");
@@ -730,5 +730,19 @@ export default function GetStartedPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function GetStartedPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-[calc(100vh-56px)] bg-gradient-soft">
+          <div className="container-padded py-10">Loading…</div>
+        </div>
+      }
+    >
+      <GetStartedPageContent />
+    </Suspense>
   );
 }

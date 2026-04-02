@@ -1,8 +1,9 @@
 'use client';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { Button } from '../../../components/ui/button';
+import { Suspense } from 'react';
 
-export default function CheckoutPage() {
+function CheckoutPageContent() {
   const params = useSearchParams();
   const router = useRouter();
   const id = params.get('id') || '';
@@ -28,5 +29,13 @@ export default function CheckoutPage() {
         <Button variant="outline" className="w-full mt-3" onClick={() => router.push('/customer')}>Back</Button>
       </div>
     </div>
+  );
+}
+
+export default function CheckoutPage() {
+  return (
+    <Suspense fallback={<div className="container-padded py-10 max-w-md">Loading…</div>}>
+      <CheckoutPageContent />
+    </Suspense>
   );
 }

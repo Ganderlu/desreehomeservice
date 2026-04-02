@@ -2,6 +2,7 @@
 import { useSearchParams } from 'next/navigation';
 import { Button } from '../../../components/ui/button';
 import Link from 'next/link';
+import { Suspense } from 'react';
 
 const services = [
   { name: 'Plumbing', price: 3000 },
@@ -13,7 +14,7 @@ const services = [
   { name: 'Handyman', price: 3500 }
 ];
 
-export default function ServicesPage() {
+function ServicesPageContent() {
   const params = useSearchParams();
   const category = params.get('category');
   const items = category ? services.filter(s => s.name === category) : services;
@@ -34,5 +35,13 @@ export default function ServicesPage() {
         ))}
       </div>
     </div>
+  );
+}
+
+export default function ServicesPage() {
+  return (
+    <Suspense fallback={<div className="container-padded py-6">Loading…</div>}>
+      <ServicesPageContent />
+    </Suspense>
   );
 }

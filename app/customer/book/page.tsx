@@ -1,13 +1,13 @@
 'use client';
 import { useSearchParams, useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { Button } from '../../../components/ui/button';
 import { Input } from '../../../components/ui/input';
 import { db } from '../../../lib/firebase/client';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { useUserStore } from '../../../store/store';
 
-export default function BookPage() {
+function BookPageContent() {
   const params = useSearchParams();
   const router = useRouter();
   const { uid } = useUserStore();
@@ -51,5 +51,15 @@ export default function BookPage() {
         <div className="text-sm text-gray-600">Escrow via Paystack. Funds are released after photo proof.</div>
       </div>
     </div>
+  );
+}
+
+export default function BookPage() {
+  return (
+    <Suspense
+      fallback={<div className="container-padded py-6 max-w-lg">Loading…</div>}
+    >
+      <BookPageContent />
+    </Suspense>
   );
 }
