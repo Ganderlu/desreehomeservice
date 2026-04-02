@@ -1,0 +1,11 @@
+node_modules
+.next
+.vercel
+.env
+*.local
+dist
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
+firebase-messaging-sw.js.map
+public/sw.js.map
