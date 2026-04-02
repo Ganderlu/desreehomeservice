@@ -7,5 +7,6 @@ dist
 pnpm-lock.yaml
 yarn.lock
 package-lock.json
+*.tsbuildinfo
 firebase-messaging-sw.js.map
 public/sw.js.map
